@@ -1,5 +1,6 @@
 import type { Todo } from "@/Type";
 import { useRef, useState } from "react";
+import styles from "@/styles/form.module.css";
 
 type Props = {
   addTodo: (todo: Todo) => void;
@@ -24,8 +25,10 @@ export function Form({ addTodo }: Props) {
         });
       }}
     >
-      <input type="text" ref={inputRef} onChange={(e) => setTodoTitle(e.target.value)} />
-      <button type="submit">Add Todo</button>
+      <input className={styles.input} type="text" ref={inputRef} onChange={(e) => setTodoTitle(e.target.value)} />
+      <button className={styles.button} type="submit">
+        Add Todo
+      </button>
     </form>
   );
 }

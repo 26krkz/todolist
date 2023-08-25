@@ -2,6 +2,7 @@ import { Todo, Todos } from "@/Type";
 import { Form } from "./Form";
 import { ListItem } from "./ListItem";
 import { useState } from "react";
+import styles from "@/styles/todolist.module.css";
 
 type Props = {
   todos: Todos;
@@ -57,13 +58,14 @@ export function TodoList(props: Props) {
   };
 
   return (
-    <>
+    <div className={styles.container}>
+      <h1>TODO LIST</h1>
       <Form addTodo={addTodo} />
-      <ul>
+      <ul className={styles.list}>
         {todos.map((todo) => (
           <ListItem key={todo.id} todo={todo} {...listItemFunctions} />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
