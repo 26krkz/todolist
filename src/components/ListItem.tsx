@@ -22,7 +22,7 @@ export function ListItem({ todo, clickChangeBox, editTodo, deleteTodo }: Props) 
         ) : (
           <>
             <input ref={inputRef} className={styles.checkbox} type="checkbox" defaultChecked={todo.isCompleted} onClick={() => clickChangeBox(todo.id)} />
-            <span>{todo.title}</span>
+            <span className={styles.title}>{todo.title}</span>
           </>
         )}
       </label>

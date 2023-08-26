@@ -8,27 +8,40 @@ type Props = {
 
 export function Form({ addTodo }: Props) {
   const [todoTitle, setTodoTitle] = useState("");
+  const [errorFlag, setErrorFlag] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
+    <>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          inputRef.current?.focus();
+          if (todoTitle === "") {
+            setErrorFlag(!errorFlag);
+            return;
+          }
 
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
-
-        addTodo({
-          id: new Date().toISOString(),
-          title: todoTitle,
-          isCompleted: false,
-        });
-      }}
-    >
-      <input className={styles.input} type="text" ref={inputRef} onChange={(e) => setTodoTitle(e.target.value)} />
-      <button className={styles.button} type="submit">
-        Add Todo
-      </button>
-    </form>
+          addTodo({
+            id: new Date().toISOString(),
+            title: todoTitle,
+            isCompleted: false,
+          });
+        }}
+      >
+        <input
+          className={styles.input}
+          type="text"
+          ref={inputRef}
+          onChange={(e) => {
+            setTodoTitle(e.target.value);
+            setErrorFlag(false);
+          }}
+        />
+        <button className={styles.button} type="submit">
+          Add Todo
+        </button>
+      </form>
+      {errorFlag && <p className={styles.error}>追加するには1文字以上記入してください。</p>}
+    </>
   );
 }

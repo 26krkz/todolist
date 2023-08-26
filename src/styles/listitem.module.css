@@ -16,6 +16,10 @@
   margin-right: 10px;
 }
 
+.title {
+  user-select: none;
+}
+
 .label {
   display: flex;
   font-size: 18px;
