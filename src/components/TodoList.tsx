@@ -1,6 +1,6 @@
 import { Todo, Todos } from "@/Type";
-import { Form } from "./Form";
-import { ListItem } from "./ListItem";
+import { Form } from "@/components/Form";
+import { ListItem } from "@/components/ListItem";
 import { useState } from "react";
 import styles from "@/styles/todolist.module.css";
 
