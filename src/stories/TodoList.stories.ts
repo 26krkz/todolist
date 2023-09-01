@@ -36,9 +36,8 @@ export const AddTodo: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByRole("textbox"), "勉強する").then(() => {
-      userEvent.click(canvas.getByRole("button", { name: "Add Todo" }));
-    });
+    await userEvent.type(canvas.getByRole("textbox"), "勉強する");
+    await userEvent.click(canvas.getByRole("button", { name: "Add Todo" }));
   },
 };
 
