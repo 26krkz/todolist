@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { composeStories } from "@storybook/react";
 import * as stories from "@/stories/TodoList.stories";
 import "@testing-library/jest-dom";
-import { waitFor } from "@storybook/testing-library";
 
 const { Default, CheckTodo, AddTodo, AddTodoWithoutText, EditTodo, DeleteTodo } = composeStories(stories);
 
@@ -22,7 +21,7 @@ describe("TodoList.tsxのテスト", () => {
     const { container } = render(<AddTodo />);
     expect(screen.getAllByRole("listitem")).toHaveLength(3);
     await AddTodo.play({ canvasElement: container });
-    await waitFor(() => expect(screen.getAllByRole("listitem")).toHaveLength(4));
+    expect(screen.getAllByRole("listitem")).toHaveLength(4);
   });
 
   test("フォームにテキストを入れずに「Add Todo」ボタンをクリックするとエラー文が表示される。", async () => {
@@ -35,13 +34,13 @@ describe("TodoList.tsxのテスト", () => {
     const { container } = render(<EditTodo />);
     expect(screen.getByRole("checkbox", { name: "買い物に行く" })).toBeInTheDocument();
     await EditTodo.play({ canvasElement: container });
-    await waitFor(() => expect(screen.getByRole("checkbox", { name: "勉強する" })).toBeInTheDocument());
+    expect(screen.getByRole("checkbox", { name: "勉強する" })).toBeInTheDocument();
   });
 
   test("TodoListの「Delete」ボタンをクリックするとTodoが削除される", async () => {
     const { container } = render(<DeleteTodo />);
     expect(screen.getByRole("checkbox", { name: "買い物に行く" })).toBeInTheDocument();
     await DeleteTodo.play({ canvasElement: container });
-    await waitFor(() => expect(screen.queryByRole("checkbox", { name: "買い物に行く" })).not.toBeInTheDocument());
+    expect(screen.queryByRole("checkbox", { name: "買い物に行く" })).not.toBeInTheDocument();
   });
 });
